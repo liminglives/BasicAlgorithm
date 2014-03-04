@@ -1,4 +1,7 @@
 #include <iostream>
+#include <stdlib.h>
+
+using namespace std;
 
 inline int max(int a, int b)
 {
@@ -14,7 +17,7 @@ typedef struct TreeNode{
 Node * MakeEmpty()
 {
     Node *tmp = (Node *)malloc(sizeof(Node));
-    
+
 }
 
 Node * find(Node *node, int data)
@@ -43,12 +46,13 @@ Node * insert(Node *node, int data)
 {
     if (node == NULL)
     {
-        Node *node = (Node *)malloc(sizeof(Node));
-        if (node = NULL)
+        node = (Node *)malloc(sizeof(Node));
+        if (node == NULL)
         {
             cout << "malloc failed" << endl;
             return NULL;
         }
+		
         node->data = data;
         node->left = NULL;
         node->right = NULL;
@@ -56,9 +60,9 @@ Node * insert(Node *node, int data)
     else
     {
         if (data < node->data)
-            insert(node->left, data);
+            node->left = insert(node->left, data);
         else if(data > node->data)
-            insert(node->right, data);
+            node->right = insert(node->right, data);
     }
     return node;
 }
@@ -69,7 +73,7 @@ Node *findMin(Node *node)
         return NULL;
     else if (node->left == NULL)
         return node;
-    else 
+    else
         return findMin(node->left);
 }
 
@@ -94,7 +98,7 @@ Node *deleteNode(Node *node, int data)
     {
         if (node->left && node->right)
         {
-            Node *t = findMax(node->right);
+            Node *t = findMin(node->right);
             node->data = t->data;
             node->right = deleteNode(node->right, t->data);
         }
@@ -116,8 +120,33 @@ Node *deleteNode(Node *node, int data)
             node = NULL;
         }
     }
-    
-    return node;    
+
+    return node;
+}
+
+void printTree(Node *node)
+{
+	if (node != NULL)
+	{
+		printTree(node->left);
+		cout << node->data << " ";
+		printTree(node->right);
+	}
+}
+
+int main()
+{
+	int a[10] = {12,3,6,4,1,11,26,14,27,8};
+	Node *root = NULL;
+	for (int i=0; i<10; ++i)
+	{
+		root = insert(root, a[i]);
+	}
+	printTree(root);
+	cout<<getHeight(root)<<endl;
+	root = deleteNode(root, 12);
+	printTree(root);
+	return 0;
 }
 
 
