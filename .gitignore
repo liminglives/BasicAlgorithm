@@ -87,6 +87,7 @@ ipch/
 *.cachefile
 *.exe
 *.stackdump
+*.o
 
 # Visual Studio profiler
 *.psess
