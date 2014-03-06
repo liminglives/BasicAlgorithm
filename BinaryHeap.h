@@ -5,9 +5,9 @@ const int MIN_DATA = -(int)((~((unsigned int)0))>>1)-1;
 
 typedef struct BinaryHeap
 {
-	int capacity;
-	int size;
-	int *data;
+    int capacity;
+    int size;
+    int *data;
 }PriorityQueue;
 
 PriorityQueue * initilaze(int maxElements);
