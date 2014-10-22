@@ -9,11 +9,19 @@ public:
     {
         cout<<"fuzhi"<<endl;
     }
-
+    virtual void func()
+    { cout<< "base func" <<endl;}
 private:
     bool isNumber;   
 };
 
+class Drived : public Base
+{
+    void func()
+    {
+        cout << "drived func" << endl;
+    }
+};
 struct test
 {
     long long a;
@@ -28,6 +36,9 @@ int main()
     cout<<sizeof(test)<<endl;
     Base a[5],*b[6];
     cout<<endl;
-    vector<Base> c(4);
+    //vector<Base> c(4);
+    Base *p;
+    p = new Drived();
+    p->func();
     return 0;
 }
